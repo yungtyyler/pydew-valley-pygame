@@ -1,0 +1,4 @@
+#GAME DEPENDENCIES
+
+pygame
+pytmx
