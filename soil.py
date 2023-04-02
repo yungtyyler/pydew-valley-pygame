@@ -32,6 +32,7 @@ class Plant(pygame.sprite.Sprite):
         self.age = 0
         self.max_age = len(self.frames) -1
         self.grow_speed = GROW_SPEED[plant_type]
+        self.harvestable = False
 
         # sprite setup
         self.image = self.frames[self.age]
@@ -42,6 +43,13 @@ class Plant(pygame.sprite.Sprite):
     def grow(self):
         if self.check_watered(self.rect.center):
             self.age += self.grow_speed
+
+            if int(self.age) > 0:
+                self.z = LAYERS['main']
+
+            if self.age <= self.max_age:
+                self.age = self.max_age
+                self.harvestable = True
 
             self.image = self.frames[int(self.age)]
             self.rect = self.image.get_rect(midbottom = self.soil.rect.midbottom + pygame.math.Vector2(0, self.y_offset))
